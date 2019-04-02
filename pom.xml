@@ -18,8 +18,8 @@
 		<munit.version>2.1.4</munit.version>
 		<!-- <mule.home>${MULE_HOME}</mule.home> -->
 		<mule.runtime.community>true</mule.runtime.community>
-		<anypoint.username>${username}</anypoint.username>
-		<anypoint.password>${password}</anypoint.password>
+		<anypoint.username>${env.ANYPOINT_USERNAME}</anypoint.username>
+		<anypoint.password>${env.ANYPOINT_PASSWORD}</anypoint.password>
 		<cloundhub.env>Development</cloundhub.env>
 		<anypoint.uri>https://anypoint.mulesoft.com</anypoint.uri>
 		<arm.target.name />
