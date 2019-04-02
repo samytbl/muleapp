@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Deploy ARM') { 
       steps {
-        sh 'mvn deploy -P arm -Darm.target.name=local-4.1.4-ee -Danypoint.username="$ANYPOINT_USERNAME"  -Danypoint.password=${password}' 
+        sh 'mvn deploy -P arm -Darm.target.name=local-4.1.4-ee -Danypoint.username=${ANYPOINT_USERNAME}  -Danypoint.password=${password}' 
       }
     }
     stage('Deploy CloudHub') { 
