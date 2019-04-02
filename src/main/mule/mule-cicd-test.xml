@@ -9,12 +9,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</http:listener-config>
 	<flow name="mule-cicd-testFlow" doc:id="4b4c24de-428d-44ed-8903-125344a366cf" >
 		<http:listener doc:name="Listener" doc:id="226703da-f28a-467b-b0bd-833995028e49" config-ref="local_listner" path="/showvariables"/>
-<<<<<<< HEAD
 		<set-payload value="TEST" doc:name="Set Payload" doc:id="9b52c0dc-65d5-4b2c-ba02-5a8355d15fcb" />
-=======
-		<set-variable value="${cloudhub.username}" doc:name="Mule home variable" doc:id="ff914de1-0b53-4b77-a6de-c89268e2f7d4" variableName="homeVar"/>
-		<set-payload value="TEST" doc:name="Set Payload To Test" doc:id="9b52c0dc-65d5-4b2c-ba02-5a8355d15fcb" />
-		<logger level="INFO" doc:name="Logger" doc:id="de0688bc-756d-42a9-ab2c-6d6f889ed5d7" message="#[vars.homeVar]"/>
->>>>>>> 6bd0b0f76f1c30a230fed573bfc1cdc75e418534
 	</flow>
 </mule>
