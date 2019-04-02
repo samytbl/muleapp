@@ -1,23 +1,31 @@
-pipeline{
- agent any
- environment {
-    ANYPOINT = credentials('ANYPOINT')
- }
- stages {
- 	stage ('Build'){
- 		steps {
- 			withMaven(maven:'maven'){
- 				sh 'mvn -f pom.xml clean install'
- 			}
- 		}
- 	}
- 	stage ('Deploy'){
- 		steps {
- 			withMaven(maven:'maven'){
- 				sh 'mvn -f pom.xml package deploy  -Dusername=$ANYPOINT_USR -Dpassword=$ANYPOINT_PSW -Denvironment=Development -DmuleDeploy'
- 			}
- 		}
- 	}
- }
-
+pipeline {
+  agent any
+  stages {
+    stage('Unit Test') { 
+      steps {
+        sh 'mvn clean test'
+      }
+    }
+    stage('Deploy Standalone') { 
+      steps {
+        sh 'mvn deploy -P standalone'
+      }
+    }
+    stage('Deploy ARM') { 
+      environment {
+        ANYPOINT_CREDENTIALS = credentials('anypoint.credentials') 
+      }
+      steps {
+        sh 'mvn deploy -P arm -Darm.target.name=local-3.9.0-ee -Danypoint.username=${ANYPOINT_CREDENTIALS_USR}  -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW}' 
+      }
+    }
+    stage('Deploy CloudHub') { 
+      environment {
+        ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
+      }
+      steps {
+        sh 'mvn deploy -P cloudhub -Dmule.version=4.1.4 -Danypoint.username=${ANYPOINT_CREDENTIALS_USR} -Danypoint.password=${ANYPOINT_CREDENTIALS_PSW}' 
+      }
+    }
+  }
 }
