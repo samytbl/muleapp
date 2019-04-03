@@ -1,0 +1,7 @@
+#CloudHub API
+cloudhub:
+  host: "anypoint.mulesoft.com"
+  port: "443"
+  path:
+    base: "/cloudhub/api"
+    notifications: "/notifications"

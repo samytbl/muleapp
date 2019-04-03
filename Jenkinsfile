@@ -11,5 +11,10 @@ pipeline {
         sh 'mvn deploy -P standalone'
       }
     }
+    stage('Deploy Cloudhub INT') { 
+      steps {
+        sh 'mvn deploy -DmuleDeploy -Dcloud.env=INT -Danypoint.businessGroup=Mulesoft -Dcloudhub.workerType=Small -DcloudhubAppName=mule-cicd-test -Dmule.version=4.1.4 -Dcloud.user=samy_toubal -Dcloud.password='Bon2jour!Aloha''
+      }
+    }
   }
 }
