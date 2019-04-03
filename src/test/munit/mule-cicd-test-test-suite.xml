@@ -13,7 +13,7 @@
 			<flow-ref doc:name="Flow-ref to mule-cicd-testFlow" doc:id="d6603f78-37df-42af-a8e3-34c898b61de3" name="mule-cicd-testFlow"/>
 		</munit:execution>
 		<munit:validation >
-			<munit-tools:assert-that doc:name="Assert that" doc:id="584d9642-2d37-4507-8e2b-8ef5cd251799" expression="#[payload]" is="#[MunitTools::equalTo('TEST')]" message="Correct"/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="584d9642-2d37-4507-8e2b-8ef5cd251799" expression="#[payload]" is="#[MunitTools::equalTo('TEST333')]" message="Correct"/>
 		</munit:validation>
 	</munit:test>
 
