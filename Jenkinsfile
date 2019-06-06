@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Deploy Cloudhub INT') { 
       steps {
-        sh 'mvn deploy -DmuleDeploy -Dcloud.env=INT -DcloudhubAppName=stime-poc -Dmule.version=4.2.0 -Dcloud.user=samy_toubal -Dcloud.password=\'Bon2jour!Aloha\''      	
+      	sh 'mvn deploy -DmuleDeploy -Dcloud.env=INT -Danypoint.businessGroup=Mulesoft -Dcloudhub.workerType=Small -DcloudhubAppName=stime-poc -Dmule.version=4.2.0 -Dcloud.user=samy_toubal -Dcloud.password=\'Bon2jour!Aloha\''
       }
     }
   }

@@ -30,7 +30,7 @@
     </flow>
     <flow name="get:\customers:stime-poc-config">
         <flow-ref doc:name="Call find customers flow" doc:id="3e0eaa22-ed9e-40a5-b90b-23f33c702868" name="customers-v1"/>
-		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="ac61426b-871e-4333-b95b-07fbec98909f" doc:name="Build final response">
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="ac61426b-871e-4333-b95b-07fbec98909f" doc:name="Build response">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
