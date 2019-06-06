@@ -46,7 +46,3 @@ target/
 .mule/**/*
 .DS_Store
 velocity.log
-
-#pomxml and jenkinsfile
-pom.xml
-Jenkinsfile
