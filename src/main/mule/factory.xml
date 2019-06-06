@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="customers-v1" doc:id="0e9dd2de-0873-4f87-b640-e189c160d585" >
+		<salesforce:query doc:name="Select Customer" doc:id="f91a2f9c-828b-419e-bb3a-6a3d5316fa88" config-ref="Salesforce_Config">
+			<salesforce:salesforce-query >SELECT Id, Name, AdresseEmail__c From  Account LIMIT 2</salesforce:salesforce-query>
+		</salesforce:query>
+		<ee:transform doc:name="Object to Json" doc:id="6046efa2-021b-4979-8902-85889b4fc88f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	Id: payload.Id,
+	name: payload.Name,
+	email: payload.AdresseEmail__c
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="customers-v2" doc:id="e83f55b2-153b-494a-84c6-d8622ec66022" >
+		<salesforce:query doc:name="Select Customer" doc:id="b1fe6843-a457-4805-9217-48e0b33672cb" config-ref="Salesforce_Config" >
+			<salesforce:salesforce-query >SELECT Id, Name, AdresseEmail__c From  Account LIMIT 2</salesforce:salesforce-query>
+		</salesforce:query>
+		<ee:transform doc:name="Object to Json" doc:id="66a17267-7637-4159-925e-d4f5938ee97c" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="sfcustomer" ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	Id: payload.Id,
+	name: payload.Name,
+	email: payload.AdresseEmail__c
+}]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<db:select doc:name="Select customer data from Heroku" doc:id="90acf147-6213-4fb2-a7d6-254ea8e234f8" config-ref="Database_Config">
+			<db:sql >SELECT * FROM public.accounts</db:sql>
+		</db:select>
+		<ee:transform doc:name="build Response" doc:id="c9f787db-abcd-477a-a7fa-506b0d0a1235" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map ( payload01 , indexOfPayload01 ) -> {
+	Id: vars.sfcustomer.Id[0],
+	name: vars.sfcustomer.name[0],
+	email: vars.sfcustomer.email[0],
+	address: payload01.Address default ""
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<configuration doc:name="Configuration" doc:id="83a37568-ab1f-4311-af9f-260e3fa3dd2a" defaultErrorHandler-ref="error-handler" />
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="53f9b99c-522a-4c13-af08-1f28b94cce4d" >
+		<salesforce:cached-basic-connection username="stoubal@salesforce.com.dev" password="##ss831992SSS" securityToken="gKxiZe2dubNGArveRixTLOBE7" url="https://test.salesforce.com/services/Soap/u/43.0" />
+	</salesforce:sfdc-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="48a1c200-8c99-4933-b7d4-69733a76da52">
+		<db:generic-connection url="jdbc:postgresql://ec2-54-247-118-238.eu-west-1.compute.amazonaws.com:5432/dc0tal96i2pes4?user=eonhxlgenxatap&amp;password=032bdb10f3a9912ac73422eb698ac95acaf1a1297b2c9e69cede6790b60a46cc&amp;sslmode=require&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory" driverClassName="org.postgresql.Driver" />
+	</db:config>
+</mule>

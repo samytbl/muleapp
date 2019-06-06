@@ -1,0 +1,32 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/c7beea57-12e5-4255-9460-61d608bc6fb6/ # 
+title: stime-poc
+version: v1
+types: 
+  customer:
+    type: object
+    properties: 
+      ID?: string
+      name: string
+      email: string
+      address: string
+
+/customers:
+  get:
+   responses: 
+    200:
+     body: 
+      application/json:
+        type: customer[]
+        examples: 
+          value:
+          -
+            ID: 0018E000014Mrzf
+            name: Samy Toubal
+            email: samy.toubal@mulesoft.com
+            address: 3 Avenue Octave Gréard
+          -
+            ID: 0018Z000017Mrzf
+            name: Benjamin Potet
+            email: benjamin.potet@mulesoft.com
+            address: 3 Avenue Octave Gréard
