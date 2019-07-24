@@ -14,15 +14,6 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
 	</http:listener-config>
 	<flow name="mule-cicd-testFlow" doc:id="4b4c24de-428d-44ed-8903-125344a366cf" >
 		<http:listener doc:name="Listener" doc:id="226703da-f28a-467b-b0bd-833995028e49" config-ref="local_listner" path="/showvariables"/>
-		<ee:transform doc:name="Object to Json" doc:id="a75ad55b-4ecf-4f9e-a133-afd87fe20bc6" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-{
-	test: "test"
-}]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
+		<set-payload value="#['TEST333']" doc:name="Set Payload" doc:id="da19222b-2911-42b7-a7ef-20b0988d0c9e" />
 	</flow>
 </mule>
