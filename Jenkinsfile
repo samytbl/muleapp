@@ -2,10 +2,15 @@ pipeline {
    agent any
 
    stages {
-      stage('Hello') {
-         steps {
-            echo 'Hello Master ${env.BRANCH_NAME}'
+      stage('Example (Not master)') {
+         when {
+            not {
+               branch 'develop'
+            }
          }
-      }
-   }
+         steps {
+               echo 'HELLO WORLD'
+          }
+       }
+    }
 }
