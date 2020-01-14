@@ -4,9 +4,7 @@ pipeline {
    stages {
       stage('Hello') {
          steps {
-           if (env.BRANCH_NAME == 'master') {
-            echo 'Hello Master'
-           } 
+            echo 'Hello Master ${env.BRANCH_NAME}'
          }
       }
    }
